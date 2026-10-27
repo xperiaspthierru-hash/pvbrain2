@@ -610,7 +610,7 @@ sensor:
     power_id: ${bms_name}_battery_charging_power
     unit_of_measurement: 'kWh'
     icon: mdi:counter
-    state_class: measurement
+    state_class: total_increasing
     device_class: energy
     accuracy_decimals: 1
     id: ${bms_name}_battery_charging_energy_today
@@ -653,13 +653,13 @@ sensor:
     power_id: ${bms_name}_battery_discharging_power
     unit_of_measurement: 'kWh'
     accuracy_decimals: 1
-    state_class: measurement
+    state_class: total_increasing
     device_class: energy
     icon: mdi:counter
     method: trapezoid
     filters:
        # Multiplication factor from W to kW is 0.001
-       - multiply: 0.001
+       - multiply: -0.001   # MODIF : la puissance de décharge est négative, on inverse le signe
     
     
   - platform: template
